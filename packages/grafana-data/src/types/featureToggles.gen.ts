@@ -1025,4 +1025,9 @@ export interface FeatureToggles {
   * @default false
   */
   alertingImportAlertmanagerAPI?: boolean;
+  /**
+  * Enables new design for data source configuration pages
+  * @default false
+  */
+  newDataSourceConfigPageDesign?: boolean;
 }

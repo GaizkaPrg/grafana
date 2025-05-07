@@ -930,4 +930,8 @@ const (
 	// FlagAlertingImportAlertmanagerAPI
 	// Enables the API to import Alertmanager configuration
 	FlagAlertingImportAlertmanagerAPI = "alertingImportAlertmanagerAPI"
+
+	// FlagNewDataSourceConfigPageDesign
+	// Enables new design for data source configuration pages
+	FlagNewDataSourceConfigPageDesign = "newDataSourceConfigPageDesign"
 )
