@@ -931,7 +931,7 @@ const (
 	// Enables the API to import Alertmanager configuration
 	FlagAlertingImportAlertmanagerAPI = "alertingImportAlertmanagerAPI"
 
-	// FlagNewDataSourceConfigPageDesign
+	// FlagNewInfluxDSConfigPageDesign
 	// Enables new design for data source configuration pages
-	FlagNewDataSourceConfigPageDesign = "newDataSourceConfigPageDesign"
+	FlagNewInfluxDSConfigPageDesign = "newInfluxDSConfigPageDesign"
 )
