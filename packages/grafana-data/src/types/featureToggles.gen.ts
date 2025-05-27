@@ -1026,7 +1026,7 @@ export interface FeatureToggles {
   */
   alertingImportAlertmanagerAPI?: boolean;
   /**
-  * Enables new design for data source configuration pages
+  * Enables new design for the InfluxDB data source configuration page
   * @default false
   */
   newInfluxDSConfigPageDesign?: boolean;
