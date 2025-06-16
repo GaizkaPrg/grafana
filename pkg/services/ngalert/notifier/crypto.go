@@ -18,6 +18,8 @@ import (
 type Crypto interface {
 	LoadSecureSettings(ctx context.Context, orgId int64, receivers []*definitions.PostableApiReceiver) error
 	Encrypt(ctx context.Context, payload []byte, opt secrets.EncryptionOptions) ([]byte, error)
+	EncryptBase64(ctx context.Context, value string, opt secrets.EncryptionOptions) (string, error)
+	DecryptBase64(ctx context.Context, value string, opt secrets.EncryptionOptions) (string, error)
 
 	getDecryptedSecret(r *definitions.PostableGrafanaReceiver, key string) (string, error)
 	ProcessSecureSettings(ctx context.Context, orgId int64, recvs []*definitions.PostableApiReceiver) error
@@ -216,20 +218,33 @@ func (c *alertmanagerCrypto) getDecryptedSecret(r *definitions.PostableGrafanaRe
 		return "", nil
 	}
 
-	decodeValue, err := base64.StdEncoding.DecodeString(storedValue)
-	if err != nil {
-		return "", err
-	}
-
-	decryptedValue, err := c.secrets.Decrypt(context.Background(), decodeValue)
-	if err != nil {
-		return "", err
-	}
-
-	return string(decryptedValue), nil
+	return c.DecryptBase64(context.Background(), storedValue, secrets.WithoutScope())
 }
 
 // Encrypt delegates encryption to secrets.Service.
 func (c *alertmanagerCrypto) Encrypt(ctx context.Context, payload []byte, opt secrets.EncryptionOptions) ([]byte, error) {
 	return c.secrets.Encrypt(ctx, payload, opt)
+}
+
+func (c *alertmanagerCrypto) EncryptBase64(ctx context.Context, value string, opt secrets.EncryptionOptions) (string, error) {
+	payload, err := c.Encrypt(ctx, []byte(value), opt)
+	if err != nil {
+		return "", err
+	}
+
+	return base64.StdEncoding.EncodeToString(payload), nil
+}
+
+func (c *alertmanagerCrypto) DecryptBase64(ctx context.Context, value string, opt secrets.EncryptionOptions) (string, error) {
+	decodeValue, err := base64.StdEncoding.DecodeString(value)
+	if err != nil {
+		return "", err
+	}
+
+	decryptedValue, err := c.secrets.Decrypt(ctx, decodeValue)
+	if err != nil {
+		return "", err
+	}
+
+	return string(decryptedValue), nil
 }

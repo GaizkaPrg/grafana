@@ -3047,7 +3047,8 @@
       "AlertmanagerUserConfig": {
         "properties": {
           "alertmanager_config": {
-            "$ref": "#/components/schemas/Config"
+            "description": "Configuration for Alertmanager in YAML format.\nin: body",
+            "type": "string"
           },
           "template_files": {
             "additionalProperties": {
@@ -5406,6 +5407,27 @@
         },
         "type": "object"
       },
+      "ExtraConfiguration": {
+        "properties": {
+          "alertmanager_config": {
+            "description": "AlertmanagerConfig stores the string representation of the alertmanager config.\nWe keep it as a string to avoid marshalling to JSON/YAML later, because\nwe want the original unredacted config with secrets.",
+            "type": "string"
+          },
+          "identifier": {
+            "type": "string"
+          },
+          "merge_matchers": {
+            "$ref": "#/components/schemas/Matchers"
+          },
+          "template_files": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "FailedUser": {
         "description": "FailedUser holds the information of an user that failed",
         "properties": {
@@ -5914,20 +5936,6 @@
         },
         "type": "object"
       },
-      "GettableAlertmanagerUserConfig": {
-        "properties": {
-          "alertmanager_config": {
-            "type": "string"
-          },
-          "template_files": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "type": "object"
-          }
-        },
-        "type": "object"
-      },
       "GettableAlertmanagers": {
         "properties": {
           "data": {
@@ -6353,6 +6361,12 @@
         "properties": {
           "alertmanager_config": {
             "$ref": "#/components/schemas/GettableApiAlertingConfig"
+          },
+          "extra_config": {
+            "items": {
+              "$ref": "#/components/schemas/ExtraConfiguration"
+            },
+            "type": "array"
           },
           "template_file_provenances": {
             "additionalProperties": {
@@ -8706,6 +8720,12 @@
         "properties": {
           "alertmanager_config": {
             "$ref": "#/components/schemas/PostableApiAlertingConfig"
+          },
+          "extra_config": {
+            "items": {
+              "$ref": "#/components/schemas/ExtraConfiguration"
+            },
+            "type": "array"
           },
           "template_files": {
             "additionalProperties": {
