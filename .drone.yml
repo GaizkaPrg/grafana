@@ -498,7 +498,7 @@ steps:
     -a targz:grafana:linux/arm/v7 -a docker:grafana:linux/amd64 -a docker:grafana:linux/amd64:ubuntu
     -a docker:grafana:linux/arm64 -a docker:grafana:linux/arm64:ubuntu -a docker:grafana:linux/arm/v7
     -a docker:grafana:linux/arm/v7:ubuntu --yarn-cache=$$YARN_CACHE_FOLDER --build-id=$$DRONE_BUILD_NUMBER
-    --ubuntu-base=ubuntu:22.04 --alpine-base=alpine:3.21.3 --tag-format='{{ .version_base
+    --ubuntu-base=ubuntu-base--alpine-base=alpine-base--tag-format='{{ .version_base
     }}-{{ .buildID }}-{{ .arch }}' --ubuntu-tag-format='{{ .version_base }}-{{ .buildID
     }}-ubuntu-{{ .arch }}' --verify='false' --grafana-dir=$$PWD > packages.txt
   - find ./dist -name '*docker*.tar.gz' -type f | xargs -n1 docker load -i
@@ -1784,7 +1784,7 @@ steps:
     -a targz:grafana:linux/arm/v7 -a docker:grafana:linux/amd64 -a docker:grafana:linux/amd64:ubuntu
     -a docker:grafana:linux/arm64 -a docker:grafana:linux/arm64:ubuntu -a docker:grafana:linux/arm/v7
     -a docker:grafana:linux/arm/v7:ubuntu --yarn-cache=$$YARN_CACHE_FOLDER --build-id=$$DRONE_BUILD_NUMBER
-    --ubuntu-base=ubuntu:22.04 --alpine-base=alpine:3.21.3 --tag-format='{{ .version_base
+    --ubuntu-base=ubuntu-base--alpine-base=alpine-base--tag-format='{{ .version_base
     }}-{{ .buildID }}-{{ .arch }}' --ubuntu-tag-format='{{ .version_base }}-{{ .buildID
     }}-ubuntu-{{ .arch }}' --verify='false' --grafana-dir=$$PWD > packages.txt
   - find ./dist -name '*docker*.tar.gz' -type f | xargs -n1 docker load -i
@@ -5206,6 +5206,6 @@ kind: secret
 name: gcr_credentials
 ---
 kind: signature
-hmac: 7f318d682f431d61add0d60afcb9360f390217961709adeb88c34f11feec35b0
+hmac: d2a998cd610a6899eb3ec6738665af5905f02a09356a3b5a896a949393638fa0
 
 ...
