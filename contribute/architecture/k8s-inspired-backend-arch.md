@@ -75,11 +75,11 @@ The `apps` directory structure is Grafana's intended future for defining APIs an
 
 **Example: Playlist App (`apps/playlist/`)**
 
-- `(plugin)/kinds/playlist.cue`: CUE schema for the `Playlist` resource kind and its `spec`.
-- `(plugin)/kinds/manifest.cue`: App and resource kind metadata.
-- `(plugin)/pkg/apis/playlist/v0alpha1/`: Generated Go types from the CUE schema.
-- `(plugin)/pkg/reconcilers/reconciler_playlist.go`: Reconciler acting on `Playlist` resources.
-- `(root)/pkg/registry/apps/playlist/register.go`: Registers the `Playlist` kind and API endpoints using the App SDK.
+- `apps/playlist/kinds/playlist.cue`: CUE schema for the `Playlist` resource kind and its `spec`.
+- `apps/playlist/kinds/manifest.cue`: App and resource kind metadata.
+- `apps/playlist/pkg/apis/playlist/v0alpha1/`: Generated Go types from the CUE schema.
+- `apps/playlist/pkg/reconcilers/reconciler_playlist.go`: Reconciler acting on `Playlist` resources.
+- `pkg/registry/apps/playlist/register.go`: Registers the `Playlist` kind and API endpoints using the App SDK.
 
 The Apps Approach creates the same Resource API endpoints (`/apis/...`) as the Registry Approach, but with a cleaner implementation and improved developer experience. It's the standard pattern for all future Grafana resources.
 
