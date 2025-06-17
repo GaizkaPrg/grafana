@@ -71,7 +71,6 @@ export const DashboardEditFormSharedFields = memo<DashboardEditFormSharedFieldsP
                     id="dashboard-workflow"
                     {...field}
                     options={workflowOptions}
-                    onChange={(value) => field.onChange(value)}
                   />
                 )}
               />
