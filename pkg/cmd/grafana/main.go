@@ -37,7 +37,7 @@ func MainApp() *cli.App {
 		Usage: "Grafana server and command line interface",
 		Authors: []*cli.Author{
 			{
-				Name:  "Grafana Project",
+				Name:  "Grafana Project - Hipalux Datum",
 				Email: "hello@grafana.com",
 			},
 		},
